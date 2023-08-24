@@ -54,10 +54,19 @@ corr_matrix["restecg"].sort_values(ascending=False)
 	c. visualize data
 
 5.    Data Preprocessing
+
+heart = train.drop("output", axis=1) #X    #input features
+heart_labels = train["output"].copy() #y  #target variable  (output variable/dependent varaible)  based on training set
+
 	a.    Data Cleaning
+
+housing.dropna(subset=["total_bedrooms"], inplace=True) # option 1  drop row
+housing.drop(labels=["total_bedrooms"], axis=1) # option 2  drop columns
+median = housing["total_bedrooms"].median() # option 3  replace using median value
+housing["total_bedrooms"].fillna(median, inplace=True)
+
 	b.    Handling Text and Categorical Data (e.g., get_dummies)
-heart = train.drop("output", axis=1) #X
-heart_labels = train["output"].copy() #y
+
 
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
@@ -96,6 +105,13 @@ heart_labels = lencoder.transform(heart_labels)
 heart_labels
 
 	c.    Feature Scaling (standardize continuous values)
+from sklearn.preprocessing import StandardScaler
+
+
+Regression = prac 5
+Classification = prac 6
+Clustering = prac 7
+
 
 6.    Modelling
 	a.    Apply few algorithms/models
