@@ -1,0 +1,116 @@
+###bar chart###   A bar chart is useful for comparing categorical data.
+###bar chart### WAY 1
+import matplotlib.pyplot as plt
+
+# Sample data
+categories = ['Category A', 'Category B', 'Category C']
+values = [20, 35, 15]
+
+# Create a bar chart
+plt.bar(categories, values)
+
+# Add labels and title
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Bar Chart Example')
+
+# Show the plot
+plt.show()
+
+###bar chart### WAY 2
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Sample data
+categories = ['Category A', 'Category B', 'Category C']
+values = [20, 35, 15]
+
+# Create a bar chart using Seaborn
+sns.barplot(x=categories, y=values)
+
+# Add title
+plt.title('Bar Chart Example')
+
+# Show the plot
+plt.show()
+
+
+###histogram###   A histogram is used to visualize the distribution of a single numerical variable.
+###histogram### WAY 1
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate random data
+data = np.random.randn(1000)
+
+# Create a histogram
+plt.hist(data, bins=20, edgecolor='black')
+
+# Add labels and title
+plt.xlabel('Values')
+plt.ylabel('Frequency')
+plt.title('Histogram Example')
+
+# Show the plot
+plt.show()
+
+###histogram### WAY 2
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate random data
+data = np.random.randn(1000)
+
+# Create a histogram using Seaborn
+sns.histplot(data, bins=20, kde=False, color='blue')
+
+# Add title
+plt.title('Histogram Example')
+
+# Show the plot
+plt.show()
+
+
+
+###scatter plot###  A scatter plot helps visualize the relationship between two numerical variables.
+###scatter plot###  WAY 1
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate random data
+x = np.random.randn(100)
+y = 2 * x + np.random.randn(100)
+
+# Create a scatter plot
+plt.scatter(x, y, color='blue', alpha=0.5)
+
+# Add labels and title
+plt.xlabel('X values')
+plt.ylabel('Y values')
+plt.title('Scatter Plot Example')
+
+# Show the plot
+plt.show()
+
+###scatter plot###  WAY 2
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generate random data
+x = np.random.randn(100)
+y = 2 * x + np.random.randn(100)
+
+# Create a scatter plot using Seaborn
+sns.scatterplot(x=x, y=y, color='blue', alpha=0.5)
+
+# Add title
+plt.title('Scatter Plot Example')
+
+# Show the plot
+plt.show()
+
+
+
+
