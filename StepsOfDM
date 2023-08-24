@@ -1,0 +1,106 @@
+#0     Import library
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import OrdinalEncoder
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import cross_val_score, cross_val_predict
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC, LinearSVC
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.metrics import classification_report, confusion_matrix
+%matplotlib inline
+
+np.random.seed(42)
+
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+
+
+#1.    Load the data
+df = pd.read_csv('heart.csv')
+
+#2.    Take a quick look at the data such as using head, describe, info
+print(df.head())
+print(df.info())
+print(len(df))
+print(df.describe())
+
+
+3.    Split your data into training and test set (no data snooping!)
+train_set, test_set = train_test_split(df, test_size=0.2, random_state=42)
+
+print("Length of train_set:", len(train_set))
+print("Length of test_set:", len(test_set))
+
+
+4.    Explore data and visualize the data to gain insights
+	a. identify %missing values
+missing_percentage = (train_set.isnull().sum() / len(train_set)) * 100
+missing_percentage
+
+
+	b. study correlation
+corr_matrix = train_set.corr(numeric_only=True)
+corr_matrix["restecg"].sort_values(ascending=False)
+
+	c. visualize data
+
+5.    Data Preprocessing
+	a.    Data Cleaning
+	b.    Handling Text and Categorical Data (e.g., get_dummies)
+heart = train.drop("output", axis=1) #X
+heart_labels = train["output"].copy() #y
+
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
+
+categorical_columns = ['sex','cp','fbs','exng','slp','output']
+numerical_columns = ['age',  'trtbps','chol',  'restecg', 'thalachh','oldpeak','ca']
+
+num_pipeline = make_pipeline(
+    SimpleImputer(strategy = "median"),
+    StandardScaler()
+)
+cat_pipeline = make_pipeline(
+    SimpleImputer(strategy = "most_frequent"),
+    OneHotEncoder(handle_unknown="ignore")
+)
+ord_pipeline = make_pipeline(
+    SimpleImputer(strategy = "most_frequent"),
+    OrdinalEncoder()
+)
+
+preprocessing = ColumnTransformer([
+    ("num", num_pipeline, numerical_columns),
+    ("cat", cat_pipeline, categorical_columns),
+    ("ord", cat_pipeline, categorical_columns),
+])
+
+heart_prepared = preprocessing.fit_transform(heart)
+heart_prepared
+
+from sklearn.preprocessing import LabelEncoder
+lencoder = LabelEncoder()
+lencoder.fit(heart_labels)
+heart_labels = lencoder.transform(heart_labels)
+heart_labels
+
+	c.    Feature Scaling (standardize continuous values)
+
+6.    Modelling
+	a.    Apply few algorithms/models
+	b.    Select few promising ones by evaluating them using validation set
+
+7.    Fine tune the short-listed models and combine them into a great solution.
+
+8.    Evaluate Your System on the Test Set
